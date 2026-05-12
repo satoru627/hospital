@@ -1,0 +1,472 @@
+﻿<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenity Medical Center | Soins d'excellence à Yaoundé</title>
+    <meta name="description" content="Centre médical moderne à Yaoundé ouvert 24h/24. Serenity Medical Center offre des soins de qualité dans un environnement serein.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        .medical-blue { color: #0ea5e9; }
+        .bg-medical-blue { background-color: #0ea5e9; }
+        .fade-in { animation: fadeIn 1.2s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Gallery Styles */
+        .gallery-item img { transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        
+        /* Lightbox Styles */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #lightbox.active { display: flex; opacity: 1; }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border: 4px solid white;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        #lightbox.active img { transform: scale(1); }
+
+        /* Testimonial Carousel Styles */
+        .testimonial-carousel-container { position: relative; width: 100%; overflow: hidden; }
+        .testimonial-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .testimonial-slide { flex: 0 0 100%; padding: 20px; box-sizing: border-box; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+
+    <!-- 1. HEADER / NAVBAR -->
+     <header class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300" id="navbar">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3">
+                <img src="images/logo.png" alt="Logo" class="h-12 w-auto object-contain">
+                <span class="text-xl font-bold tracking-tight text-slate-800">Serenity <span class="medical-blue">Medical</span></span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#accueil" class="font-medium hover:text-sky-500">Accueil</a>
+                <a href="#apropos" class="font-medium hover:text-sky-500">À propos</a>
+                <a href="#services" class="font-medium hover:text-sky-500">Services</a>
+                <a href="#gallery" class="font-medium hover:text-sky-500">Galerie</a>
+                <a href="#contact" class="font-medium hover:text-sky-500">Contact</a>
+                <a href="#reservation" class="bg-medical-blue text-white px-6 py-2.5 rounded-full font-semibold hover:bg-sky-600 shadow-md">Prendre rendez-vous</a> 
+            </div>
+            <button class="md:hidden p-2 text-slate-700" id="mobile-menu-btn"><i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i></button>
+        </nav>
+        <div class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 py-6 px-6 shadow-xl" id="mobile-menu">
+            <div class="flex flex-col space-y-4">
+                <a href="#accueil" class="mobile-link text-lg font-medium border-b border-gray-50 pb-2">Accueil</a>
+                <a href="#apropos" class="mobile-link text-lg font-medium border-b border-gray-50 pb-2">À propos</a>
+                <a href="#services" class="mobile-link text-lg font-medium border-b border-gray-50 pb-2">Services</a>
+                <a href="#gallery" class="mobile-link text-lg font-medium border-b border-gray-50 pb-2">Galerie</a>
+                <a href="#contact" class="mobile-link text-lg font-medium border-b border-gray-50 pb-2">Contact</a>
+                <a href="#reservation" class="bg-medical-blue text-white text-center px-6 py-3 rounded-lg font-semibold">Prendre rendez-vous</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section id="accueil" class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-sky-50 -z-10 rounded-l-[100px] hidden md:block opacity-50"></div>
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+                <div class="inline-block px-4 py-1.5 mb-6 bg-sky-100 text-sky-700 rounded-full text-sm font-bold uppercase tracking-wider">Établissement de Santé à Yaoundé</div>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6">Des soins de qualité, dans un environnement <span class="medical-blue">serein</span></h1>
+                <p class="text-lg text-slate-600 mb-10 max-w-lg leading-relaxed">Centre médical moderne ouvert 24h/24 à Yaoundé. Nous allions expertise médicale et technologie de pointe pour votre bien-être.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#reservation" class="bg-medical-blue text-white px-8 py-4 rounded-full font-bold text-center shadow-lg hover:bg-sky-600 transition-all">Réserver maintenant</a>
+                    <a href="#contact" class="bg-white text-slate-700 border border-gray-200 px-8 py-4 rounded-full font-bold text-center hover:bg-gray-50 transition-all">Nous contacter</a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <div class="rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+                    <img src="https://ayilaa.s3.eu-west-1.amazonaws.com/attraction/14940/media/68271476edb86_1747391606_469182594_122201347340192103_7829373866931329750_n.jpg" alt="Medical Center" class="w-full h-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. À PROPOS -->
+    <section id="apropos" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="md:w-1/2 reveal grid grid-cols-2 gap-4">
+                    <img src="https://www.businesslist.co.cm/img/cm/z/1750259629-10-serenity-medical-center.jpg" class="rounded-2xl shadow-md h-64 w-full object-cover">
+                    <img src="https://ayilaa.s3.eu-west-1.amazonaws.com/attraction/14940/media/682714745d7ce_1747391604_469005760_122201347280192103_7937391229749368270_n.jpg" class="rounded-2xl shadow-md h-64 w-full object-cover mt-8">
+                </div>
+                <div class="md:w-1/2 reveal">
+                    <h2 class="text-sky-500 font-bold uppercase text-sm mb-4 tracking-widest">À propos</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Un engagement total pour votre santé</h3>
+                    <p class="text-slate-600 mb-8 leading-relaxed">Situé au quartier Damas, Serenity Medical Center se distingue par son approche centrée sur le patient. Nous offrons une propreté irréprochable et un accueil chaleureux.</p>
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center"><i data-lucide="clock" class="text-sky-500 mr-4"></i> <span class="font-bold">Ouvert 24h/24, 7j/7</span></li> 
+                        <li class="flex items-center"><i data-lucide="users" class="text-sky-500 mr-4"></i> <span class="font-bold">Personnel hautement qualifié</span></li>
+                        <li class="flex items-center"><i data-lucide="activity" class="text-sky-500 mr-4"></i> <span class="font-bold">Équipements de pointe</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SERVICES -->
+    <section id="services" class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="text-sky-500 font-bold uppercase text-sm mb-4">Nos Services</h2>
+                <h3 class="text-3xl md:text-4xl font-bold mb-6">Une gamme complète de soins</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all border group reveal">
+                    <div class="bg-sky-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-500"><i data-lucide="stethoscope" class="text-sky-600 group-hover:text-white"></i></div>
+                    <h4 class="text-xl font-bold mb-4">Consultation générale</h4>
+                    <p class="text-slate-500 mb-6">Évaluation complète de votre santé par des experts.</p>
+                    <a href="#reservation" class="text-sky-500 font-bold">Réserver <i data-lucide="arrow-right" class="inline w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all border group reveal" style="transition-delay: 100ms;">
+                    <div class="bg-red-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-500"><i data-lucide="ambulance" class="text-red-600 group-hover:text-white"></i></div>
+                    <h4 class="text-xl font-bold mb-4">Urgences 24h/24</h4>
+                    <p class="text-slate-500 mb-6">Service d'urgence réactif à tout moment.</p>
+                    <a href="#reservation" class="text-red-500 font-bold">Appeler <i data-lucide="phone" class="inline w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all border group reveal" style="transition-delay: 200ms;">
+                    <div class="bg-green-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500"><i data-lucide="bed" class="text-green-600 group-hover:text-white"></i></div>
+                    <h4 class="text-xl font-bold mb-4">Hospitalisation</h4>
+                    <p class="text-slate-500 mb-6">Chambres confortables pour votre rétablissement.</p>
+                    <a href="#reservation" class="text-green-500 font-bold">Détails <i data-lucide="info" class="inline w-4 h-4 ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="text-sky-500 font-bold uppercase text-sm mb-4">Notre Galerie</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6">Découvrez notre infrastructure</h3>
+                <p class="text-slate-600">Découvrez nos installations modernes et notre équipement de pointe.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="gallery-item relative overflow-hidden rounded-2xl aspect-square cursor-pointer reveal">
+                    <img src="https://ayilaa.s3.eu-west-1.amazonaws.com/attraction/14940/media/68271476edb86_1747391606_469182594_122201347340192103_7829373866931329750_n.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item relative overflow-hidden rounded-2xl aspect-square cursor-pointer reveal" style="transition-delay: 100ms;">
+                    <img src="https://ayilaa.s3.eu-west-1.amazonaws.com/attraction/14940/media/68271472a30f4_1747391602_469256038_122201347472192103_756076803215030053_n.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item relative overflow-hidden rounded-2xl aspect-square cursor-pointer reveal" style="transition-delay: 200ms;">
+                    <img src="https://ayilaa.s3.eu-west-1.amazonaws.com/attraction/14940/media/6827147672115_1747391606_469099611_122201347478192103_4770033963028194457_n.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item relative overflow-hidden rounded-2xl aspect-square cursor-pointer reveal" style="transition-delay: 300ms;">
+                    <img src="https://ayilaa.s3.eu-west-1.amazonaws.com/attraction/14940/media/682714745d7ce_1747391604_469005760_122201347280192103_7937391229749368270_n.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item relative overflow-hidden rounded-2xl aspect-square cursor-pointer reveal">
+                    <img src="https://www.businesslist.co.cm/img/cm/z/1750259629-10-serenity-medical-center.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item relative overflow-hidden rounded-2xl aspect-square cursor-pointer reveal" style="transition-delay: 100ms;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaqvgZNZ-kQxEFH6__nVCpWzeMAHCJUL4-mg&s" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item relative overflow-hidden rounded-2xl aspect-square cursor-pointer reveal" style="transition-delay: 200ms;">
+                    <img src="https://fr.businesslist.co.cm/img/cm/d/1751451342_88811.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item relative overflow-hidden rounded-2xl aspect-square cursor-pointer reveal" style="transition-delay: 300ms;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnbzIEMTUi5DpQcJB2_elF60d-kATV3rNlSw&s" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox">
+        <button id="close-lightbox" class="absolute top-8 right-8 text-white"><i data-lucide="x" class="w-10 h-10"></i></button>
+        <img src="" id="lightbox-img" alt="Lightbox">
+    </div>
+
+    <!-- 5. TESTIMONIALS CAROUSEL -->
+    <section id="testimonials" class="py-20 bg-slate-50 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="text-sky-500 font-bold uppercase text-sm mb-4">Témoignages</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Ce que disent nos patients</h3>
+                <p class="text-slate-600">Expériences réelles de nos patients</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto testimonial-carousel-container group" id="carousel-container">
+                <div class="testimonial-track" id="testimonial-track">
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-10 rounded-[40px] shadow-xl border text-center">
+                            <div class="flex justify-center mb-6 text-amber-400">
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                            </div>
+                            <p class="text-xl md:text-2xl text-slate-700 italic mb-8">"Prise en charge rapide et efficace. Personnel très humain."</p>
+                            <h5 class="text-xl font-bold">Jean-Paul Ndoumbe</h5>
+                            <!-- <p class="text-sky-500">Cardiologie</p> -->
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-10 rounded-[40px] shadow-xl border text-center">
+                            <div class="flex justify-center mb-6 text-amber-400">
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                            </div>
+                            <p class="text-xl md:text-2xl text-slate-700 italic mb-8">"Un accouchement serein. Les chambres sont parfaites."</p>
+                            <h5 class="text-xl font-bold">Marie-Thérèse Bikoi</h5>
+                            <!-- <p class="text-sky-500">Maternité</p> -->
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-10 rounded-[40px] shadow-xl border text-center">
+                            <div class="flex justify-center mb-6 text-amber-400">
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                            </div>
+                            <p class="text-xl md:text-2xl text-slate-700 italic mb-8">"je recommande vivement ce centre médical."</p>
+                            <h5 class="text-xl font-bold">Marie-Thérèse Bikoi</h5>
+                            <!-- <p class="text-sky-500">Marie ngono</p> -->
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-10 rounded-[40px] shadow-xl border text-center">
+                            <div class="flex justify-center mb-6 text-amber-400">
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                                <i data-lucide="star" class="fill-current w-6 h-6"></i>
+                            </div>
+                            <p class="text-xl md:text-2xl text-slate-700 italic mb-8">"pour moi c'est le meilleur centre médical de yaoundé."</p>
+                            <h5 class="text-xl font-bold">emmanuel</h5>
+                            <!-- <p class="text-sky-500">Marie ngono</p> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button id="prev-btn" class="absolute top-1/2 -left-12 -translate-y-1/2 bg-white text-slate-800 w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all opacity-0 group-hover:opacity-100">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+                <button id="next-btn" class="absolute top-1/2 -right-12 -translate-y-1/2 bg-white text-slate-800 w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all opacity-0 group-hover:opacity-100">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+
+                <!-- Indicator Dots -->
+                <div class="flex justify-center mt-10 space-x-3" id="indicator-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. RÉSERVATION -->
+    <section id="reservation" class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-5xl shadow-2xl rounded-[40px] overflow-hidden">
+            <div class="p-12 bg-gray-50 w-full">
+                <h3 class="text-3xl font-bold mb-8 text-center">Prendre rendez-vous</h3>
+                <form id="reservationForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" id="name" placeholder="Nom" required class="p-4 rounded-xl border outline-none">
+                    <input type="email" id="email" placeholder="Email" required class="p-4 rounded-xl border outline-none">
+                    <input type="tel" id="phone" placeholder="Téléphone" required class="p-4 rounded-xl border outline-none">
+                    <input type="date" id="date" required class="p-4 rounded-xl border outline-none">
+                    <select id="service" required class="p-4 rounded-xl border outline-none md:col-span-2">
+                        <option value="">Service souhaité</option>
+                        <option value="gen">Consultation Générale</option>
+                        <option value="urg">Urgence</option>
+                    </select>
+                    <textarea id="message" placeholder="Message" class="p-4 rounded-xl border outline-none md:col-span-2 h-32"></textarea>
+                    <button type="submit" class="md:col-span-2 bg-medical-blue text-white py-4 rounded-xl font-bold hover:bg-sky-600 transition-all">Envoyer la demande</button>
+                </form>
+                <div id="successMessage" class="hidden text-center p-8 bg-green-50 text-green-700 rounded-xl">
+                    <h4 class="font-bold text-2xl mb-2">Merci !</h4>
+                    <p>Votre demande a été envoyée avec succès.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CONTACT -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="reveal">
+                <h3 class="text-3xl font-bold mb-8">Nous trouver</h3>
+                <p class="mb-4 flex items-center"><i data-lucide="map-pin" class="text-sky-500 mr-4"></i> Quartier Damas, Yaoundé</p>
+                <p class="mb-4 flex items-center"><i data-lucide="phone" class="text-sky-500 mr-4"></i> +237 6XX XX XX XX</p>
+                <p class="mb-8 flex items-center"><i data-lucide="mail" class="text-sky-500 mr-4"></i> contact@serenity.cm</p>
+                <div class="h-64 rounded-2xl overflow-hidden shadow-lg">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15923.473539822645!2d11.4883584!3d3.8384214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcf7a21648a73%3A0x6b158017c66d16f4!2sDamas%2C%20Yaoundé!5e0!3m2!1sfr!2scm!4v1715420000000!5m2!1sfr!2scm" width="100%" height="100%" style="border:0;" allowfullscreen=""></iframe>
+                </div>
+            </div>
+            <div class="bg-slate-900 text-white p-12 rounded-[40px] reveal">
+                <h3 class="text-2xl font-bold mb-6">FAQ Express</h3>
+                <div class="space-y-4">
+                    <details class="group bg-slate-800 p-4 rounded-xl"><summary class="cursor-pointer font-bold">Urgences 24/7 ?</summary><p class="mt-4 text-slate-400">Oui, nous sommes ouverts en permanence.</p></details>
+                    <details class="group bg-slate-800 p-4 rounded-xl"><summary class="cursor-pointer font-bold">Assurances ?</summary><p class="mt-4 text-slate-400">Nous acceptons la plupart des assurances locales.</p></details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-white py-12 text-center"><p>&copy; 2026 Serenity Medical Center. Tous droits réservés.</p></footer>
+
+    <a href="https://wa.me/237600000000" class="fixed bottom-8 right-8 bg-green-500 text-white p-4 rounded-full shadow-2xl animate-bounce"><i data-lucide="message-circle"></i></a>
+
+    <script>
+        lucide.createIcons();
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        
+        const track = document.getElementById('testimonial-track');
+        if(track) {
+            const slides = Array.from(track.children);
+            const nextBtn = document.getElementById('next-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const dotContainer = document.getElementById('indicator-dots');
+            let currentIndex = 0;
+            let slideInterval;
+
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-gray-300', 'transition-all');
+                if (i === 0) dot.classList.replace('bg-gray-300', 'bg-sky-500');
+                dot.addEventListener('click', () => moveToSlide(i));
+                dotContainer.appendChild(dot);
+            });
+            const dots = Array.from(dotContainer.children);
+            const moveToSlide = (index) => {
+                track.style.transform = "translateX(-" + (index * 100) + "%)";
+                currentIndex = index;
+                dots.forEach((dot, i) => {
+                    if (i === index) dot.classList.replace('bg-gray-300', 'bg-sky-500');
+                    else dot.classList.replace('bg-sky-500', 'bg-gray-300');
+                });
+            };
+            if(nextBtn) nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % slides.length; moveToSlide(currentIndex); });
+            if(prevBtn) prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + slides.length) % slides.length; moveToSlide(currentIndex); });
+            const startAutoPlay = () => { slideInterval = setInterval(() => { currentIndex = (currentIndex + 1) % slides.length; moveToSlide(currentIndex); }, 4000); };
+            startAutoPlay();
+            const container = document.getElementById('carousel-container');
+            if(container) {
+                container.addEventListener('mouseenter', () => clearInterval(slideInterval));
+                container.addEventListener('mouseleave', startAutoPlay);
+            }
+        }
+        
+        const reveals = document.querySelectorAll('.reveal');
+        const handleScroll = () => { reveals.forEach(r => { if(r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add('active'); }); };
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('load', handleScroll);
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => { lightboxImg.src = item.querySelector('img').src; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; });
+        });
+        const closeL = document.getElementById('close-lightbox');
+        if(closeL) closeL.addEventListener('click', () => { lightbox.classList.remove('active'); document.body.style.overflow = 'auto'; });
+        if(lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('active'); });
+
+        // --- CONFIGURATION ---
+        const DOCTOR_WHATSAPP = "237 659919342"; // Remplacez par le numéro du médecin
+
+        const form = document.getElementById('reservationForm');
+        const successMsg = document.getElementById('successMessage');
+        const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+
+        if (form && submitBtn) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Collecte des données
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const date = document.getElementById('date').value;
+                const serviceSelect = document.getElementById('service');
+                const service = serviceSelect.options[serviceSelect.selectedIndex].text;
+                const message = document.getElementById('message').value.trim();
+
+                // Validation
+                if (!name || !phone || !date || !serviceSelect.value) {
+                    alert("Veuillez remplir tous les champs obligatoires.");
+                    return;
+                }
+
+                // État de chargement
+                const originalText = submitBtn.innerText;
+                submitBtn.innerText = "Envoi en cours...";
+                submitBtn.disabled = true;
+
+                // Formatage du message WhatsApp
+                const text = `🏥 *NOUVELLE DEMANDE DE RENDEZ-VOUS*
+
+👤 *Nom :* ${name}
+📞 *Téléphone :* ${phone}
+📧 *Email :* ${email || 'Non fourni'}
+📅 *Date :* ${date}
+🩺 *Service :* ${service}
+💬 *Message :* ${message || 'Pas de message supplémentaire'}`;
+
+                // Encodage et ouverture de WhatsApp
+                const encodedText = encodeURIComponent(text);
+                const whatsappUrl = `https://wa.me/${DOCTOR_WHATSAPP}?text=${encodedText}`;
+
+                // Ouvrir WhatsApp dans un nouvel onglet
+                window.open(whatsappUrl, '_blank');
+
+                // Réinitialisation du formulaire et de l'interface
+                setTimeout(() => {
+                    form.reset();
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Afficher le message de succès temporairement
+                    form.classList.add('hidden');
+                    successMsg.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        successMsg.classList.add('hidden');
+                        form.classList.remove('hidden');
+                    }, 5000);
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
